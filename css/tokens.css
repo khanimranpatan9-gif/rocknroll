@@ -1,0 +1,117 @@
+:root {
+  /* Canvas & Surfaces */
+  --bg-primary: #0C0E13;
+  --bg-surface: #141720;
+  --bg-surface-card: #1A1E2A;
+  --bg-surface-elevated: #222736;
+  --bg-glass: rgba(20, 23, 32, 0.85);
+
+  /* Borders & Dividers */
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-focus: rgba(229, 9, 20, 0.5);
+  --border-card: rgba(255, 255, 255, 0.05);
+
+  /* Brand Accents */
+  --accent-red: #E50914;
+  --accent-red-hover: #C50812;
+  --accent-red-glow: rgba(229, 9, 20, 0.35);
+
+  --accent-amber: #F59E0B;
+  --accent-amber-bg: rgba(245, 158, 11, 0.12);
+
+  --accent-whatsapp: #00A884;
+  --accent-whatsapp-hover: #008F6F;
+
+  /* Dietary Badges */
+  --veg-color: #22C55E;
+  --veg-bg: rgba(34, 197, 94, 0.12);
+  --nonveg-color: #EF4444;
+  --nonveg-bg: rgba(239, 68, 68, 0.12);
+
+  /* Text Colors */
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --text-inverse: #0C0E13;
+
+  /* Typography */
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-base: 16px;
+  --space-lg: 20px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+
+  /* Radii */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 12px 32px -4px rgba(0, 0, 0, 0.5);
+  --shadow-glow-red: 0 0 20px var(--accent-red-glow);
+
+  /* Transitions */
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --trans-fast: 150ms var(--ease-smooth);
+  --trans-normal: 250ms var(--ease-smooth);
+}
+
+/* ==========================================================
+   BRIGHT LIGHT CREAM & GREEN BUTTONS THEME (Customer & Admin)
+   ========================================================== */
+:root[data-theme="light"],
+html[data-theme="light"],
+[data-theme="light"] {
+  /* Canvas & Surfaces: Radiant Fresh Ivory Cream & Pure White */
+  --bg-primary: #FFFDF9;
+  --bg-surface: #FFFFFF;
+  --bg-surface-card: #FFFFFF;
+  --bg-surface-elevated: #F7F4EB;
+  --bg-glass: rgba(255, 253, 249, 0.98);
+
+  /* Borders & Dividers */
+  --border-subtle: #E7E1D7;
+  --border-focus: #16A34A;
+  --border-card: #E5DFD4;
+
+  /* GREEN BUTTONS & ACCENTS (Emerald & Leaf Green) */
+  --accent-red: #16A34A;
+  --accent-red-hover: #15803D;
+  --accent-red-glow: rgba(22, 163, 74, 0.35);
+
+  --accent-amber: #B45309;
+  --accent-amber-bg: rgba(245, 158, 11, 0.12);
+
+  --accent-whatsapp: #15803D;
+  --accent-whatsapp-hover: #166534;
+
+  /* Dietary Badges */
+  --veg-color: #16A34A;
+  --veg-bg: rgba(22, 163, 74, 0.14);
+  --nonveg-color: #DC2626;
+  --nonveg-bg: rgba(220, 38, 38, 0.12);
+
+  /* Text Colors: Solid Crisp Black */
+  --text-primary: #000000;
+  --text-secondary: #1F2937;
+  --text-muted: #4B5563;
+  --text-inverse: #FFFFFF;
+
+  /* Shadows: Soft Luminous Clean Shadows */
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 32px -4px rgba(0, 0, 0, 0.1);
+  --shadow-glow-red: 0 0 20px rgba(22, 163, 74, 0.35);
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Imran Khan",
+    "phone": "8500677368",
+    "role": "Super Admin",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Irfan",
+    "phone": "9848879728",
+    "role": "Store Owner",
+    "status": "ACTIVE"
+  }
+]

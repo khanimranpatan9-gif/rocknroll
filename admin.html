@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Rock N Rolls • Kitchen & Admin Live Orders</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Bebas+Neue&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#16A34A">
+  <style>
+    body {
+      background: #0B0E14;
+      color: #E2E8F0;
+      font-family: var(--font-body);
+      min-height: 100vh;
+      margin: 0;
+      padding-bottom: 40px;
+    }
+
+    /* Light Mode Overrides for Kitchen Admin */
+    html[data-theme="light"] body {
+      background: #FFFDF9 !important;
+      color: #000000 !important;
+    }
+    html[data-theme="light"] .admin-header {
+      background: #FFFFFF !important;
+      border-bottom: 1px solid #E5E0D8 !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
+    }
+    html[data-theme="light"] .admin-title-wrap h1 {
+      color: #000000 !important;
+    }
+    html[data-theme="light"] .admin-top-badge {
+      background: #FFFFFF !important;
+      border: 1px solid #D6D0C4 !important;
+      color: #000000 !important;
+      font-weight: 700 !important;
+    }
+    html[data-theme="light"] #btnAdminEnableNotifications {
+      background: #DCFCE7 !important;
+      border-color: #86EFAC !important;
+      color: #166534 !important;
+    }
+    html[data-theme="light"] #btnAdminBellTest {
+      background: #FEF3C7 !important;
+      border-color: #FCD34D !important;
+      color: #92400E !important;
+    }
+    html[data-theme="light"] a[href="index.html"].admin-top-badge {
+      background: #FEF3C7 !important;
+      border-color: #FCD34D !important;
+      color: #92400E !important;
+    }
+    html[data-theme="light"] #btnAdminLogout {
+      background: #FEE2E2 !important;
+      border-color: #FCA5A5 !important;
+      color: #DC2626 !important;
+    }
+    html[data-theme="light"] .admin-toolbar,
+    html[data-theme="light"] .admin-order-card {
+      background: #FFFFFF !important;
+      border-color: #E5E0D8 !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05) !important;
+      color: #000000 !important;
+    }
+    html[data-theme="light"] .admin-item-title,
+    html[data-theme="light"] .admin-order-id,
+    html[data-theme="light"] .admin-metric-val {
+      color: #000000 !important;
+      font-weight: 800 !important;
+    }
+    html[data-theme="light"] .admin-order-meta,
+    html[data-theme="light"] .admin-item-sub {
+      color: #1F2937 !important;
+    }
+    html[data-theme="light"] .admin-item-line {
+      border-bottom: 1px dashed #E5E7EB !important;
+    }
+    /* CUSTOMER NAME AND DETAILS ON ORDER CARD */
+    html[data-theme="light"] .admin-customer-info-row {
+      background: #F3F4F6 !important;
+      border: 1px solid #E5E7EB !important;
+    }
+    html[data-theme="light"] .admin-customer-pill {
+      color: #000000 !important;
+      font-weight: 700 !important;
+    }
+    html[data-theme="light"] .admin-customer-name,
+    [data-theme="light"] .admin-customer-name {
+      color: #000000 !important;
+      font-weight: 800 !important;
+    }
+    html[data-theme="light"] .admin-phone-link {
+      color: #1D4ED8 !important;
+      background: #EFF6FF !important;
+      border: 1px solid #BFDBFE !important;
+      font-weight: 800 !important;
+    }
+    html[data-theme="light"] .admin-notes-alert {
+      background: #FEF9C3 !important;
+      border: 1px solid #FDE047 !important;
+      color: #854D0E !important;
+    }
+    /* Workflow Action Buttons */
+    html[data-theme="light"] .btn-wf-prep {
+      background: #FEF3C7 !important;
+      border: 1px solid #FCD34D !important;
+      color: #92400E !important;
+      font-weight: 800 !important;
+    }
+    html[data-theme="light"] .btn-wf-ready {
+      background: #DCFCE7 !important;
+      border: 1px solid #86EFAC !important;
+      color: #166534 !important;
+      font-weight: 800 !important;
+    }
+    html[data-theme="light"] .btn-wf-done {
+      background: #DBEAFE !important;
+      border: 1px solid #93C5FD !important;
+      color: #1E40AF !important;
+      font-weight: 800 !important;
+    }
+    /* Order Status Badges in Light Mode */
+    html[data-theme="light"] .admin-status-badge.status-ready {
+      background: #DCFCE7 !important;
+      border-color: #86EFAC !important;
+      color: #166534 !important;
+    }
+    html[data-theme="light"] .admin-status-badge.status-prep {
+      background: #FEF3C7 !important;
+      border-color: #FCD34D !important;
+      color: #92400E !important;
+    }
+    html[data-theme="light"] .admin-status-badge.status-done {
+      background: #DBEAFE !important;
+      border-color: #93C5FD !important;
+      color: #1E40AF !important;
+    }
+    html[data-theme="light"] .admin-pay-badge.pay-paid {
+      background: #DCFCE7 !important;
+      border-color: #86EFAC !important;
+      color: #166534 !important;
+    }
+    html[data-theme="light"] .admin-pay-badge.pay-cash {
+      background: #FEF3C7 !important;
+      border-color: #FCD34D !important;
+      color: #92400E !important;
+    }
+    /* Card Footer & Dispatch Buttons */
+    html[data-theme="light"] .admin-card-footer {
+      border-top: 1px solid #E5E7EB !important;
+    }
+    html[data-theme="light"] .admin-card-footer span {
+      color: #4B5563 !important;
+    }
+    html[data-theme="light"] .admin-card-footer div {
+      color: #000000 !important;
+    }
+    html[data-theme="light"] .btn-admin-whatsapp,
+    html[data-theme="light"] .btn-admin-open-group {
+      background: linear-gradient(135deg, #16A34A, #15803D) !important;
+      color: #FFFFFF !important;
+      border: none !important;
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35) !important;
+    }
+    html[data-theme="light"] .btn-admin-copy {
+      background: #FFFFFF !important;
+      border: 1px solid #D6D0C4 !important;
+      color: #000000 !important;
+      font-weight: 700 !important;
+    }
+    html[data-theme="light"] .autocopy-toggle-wrap {
+      background: #F3F4F6 !important;
+      border-color: #D6D0C4 !important;
+      color: #000000 !important;
+    }
+    html[data-theme="light"] .empty-orders-state {
+      background: #FFFFFF !important;
+      border: 1px dashed #D1D5DB !important;
+      color: #000000 !important;
+    }
+    html[data-theme="light"] .empty-orders-state h3 {
+      color: #000000 !important;
+    }
+    html[data-theme="light"] .empty-orders-state p {
+      color: #4B5563 !important;
+    }
+
+    .admin-header {
+      background: rgba(18, 22, 31, 0.95);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 14px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .admin-logo-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #EF4444, #B91C1C);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+    }
+
+    .admin-title-wrap h1 {
+      font-size: 1.0625rem;
+      font-weight: 800;
+      color: #FFF;
+      margin: 0;
+      font-family: var(--font-heading);
+      letter-spacing: 0.02em;
+    }
+
+    .admin-title-wrap p {
+      font-size: 0.6875rem;
+      color: var(--accent-amber);
+      margin: 2px 0 0;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .live-pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22C55E;
+      display: inline-block;
+      box-shadow: 0 0 8px #22C55E;
+      animation: pulseAnim 1.8s infinite;
+    }
+
+    @keyframes pulseAnim {
+      0% { transform: scale(0.9); opacity: 0.8; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.8; }
+    }
+
+    .admin-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .admin-top-badge {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #FFF;
+    }
+
+    .admin-main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 18px 16px;
+    }
+
+    .admin-toolbar {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .group-link-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 168, 132, 0.15);
+      border: 1px solid rgba(0, 168, 132, 0.35);
+      color: #25D366;
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 20px;
+      transition: all var(--trans-fast);
+    }
+
+    .group-link-pill:hover {
+      background: #00A884;
+      color: #FFF;
+    }
+
+    .admin-order-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      transition: all var(--trans-fast);
+      position: relative;
+    }
+
+    .admin-order-card.new-order {
+      border-color: rgba(234, 179, 8, 0.6);
+      box-shadow: 0 4px 24px rgba(234, 179, 8, 0.2);
+    }
+
+    .admin-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
+
+    .admin-order-id {
+      font-family: monospace;
+      font-size: 1.125rem;
+      font-weight: 900;
+      color: var(--accent-amber);
+      letter-spacing: 0.03em;
+    }
+
+    .admin-order-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .admin-items-list {
+      margin: 12px 0;
+    }
+
+    .admin-item-line {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px dashed rgba(255,255,255,0.06);
+      font-size: 0.875rem;
+    }
+
+    .admin-item-title {
+      font-weight: 700;
+      color: #FFF;
+    }
+
+    .admin-item-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .admin-notes-alert {
+      background: rgba(234, 179, 8, 0.12);
+      border: 1px solid rgba(234, 179, 8, 0.35);
+      border-radius: 6px;
+      padding: 8px 12px;
+      margin: 10px 0;
+      color: #FDE047;
+      font-size: 0.8125rem;
+      font-weight: 600;
+    }
+
+    .admin-card-footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .admin-actions-deck {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-admin-whatsapp {
+      background: #00A884;
+      color: #FFF;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      font-size: 0.8125rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 168, 132, 0.35);
+      transition: all var(--trans-fast);
+    }
+
+    .btn-admin-whatsapp:hover {
+      background: #008F6F;
+      transform: translateY(-1px);
+    }
+
+    .btn-admin-open-group {
+      background: linear-gradient(135deg, #10B981, #059669);
+      color: #FFF;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 8px 13px;
+      font-size: 0.8125rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+      transition: all var(--trans-fast);
+    }
+
+    .btn-admin-open-group:hover {
+      background: linear-gradient(135deg, #059669, #047857);
+      transform: translateY(-1px);
+    }
+
+    .btn-admin-copy {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFF;
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all var(--trans-fast);
+    }
+
+    .btn-admin-copy:hover {
+      background: var(--accent-amber);
+      color: #1A1202;
+    }
+
+    .autocopy-toggle-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 5px 12px;
+      font-size: 0.75rem;
+      color: #CBD5E1;
+      font-weight: 600;
+    }
+
+    .autocopy-toggle-wrap input[type="checkbox"] {
+      accent-color: #10B981;
+      cursor: pointer;
+      width: 16px;
+      height: 16px;
+    }
+
+    .btn-admin-delete {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #EF4444;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--trans-fast);
+    }
+
+    .btn-admin-delete:hover {
+      background: #EF4444;
+      color: #FFF;
+    }
+
+    .admin-workflow-actions {
+      display: flex;
+      gap: 8px;
+      margin: 12px 0;
+      flex-wrap: wrap;
+    }
+
+    .btn-workflow {
+      flex: 1;
+      min-width: 130px;
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 800;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all var(--trans-fast);
+      letter-spacing: 0.02em;
+    }
+
+    .btn-wf-prep {
+      background: rgba(245, 158, 11, 0.16);
+      color: #FBBF24;
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+
+    .btn-wf-prep:hover {
+      background: rgba(245, 158, 11, 0.28);
+    }
+
+    .btn-wf-ready {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(5, 150, 105, 0.25));
+      color: #4ADE80;
+      border-color: rgba(16, 185, 129, 0.45);
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+    }
+
+    .btn-wf-ready:hover {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.35), rgba(5, 150, 105, 0.35));
+    }
+
+    .btn-wf-done {
+      background: rgba(59, 130, 246, 0.16);
+      color: #60A5FA;
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+
+    .btn-wf-done:hover {
+      background: rgba(59, 130, 246, 0.28);
+    }
+
+    .empty-orders-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+
+    .empty-orders-state h3 {
+      color: #FFF;
+      font-size: 1.25rem;
+      margin-top: 12px;
+    }
+
+    /* Admin Authentication Lock Screen Overlay */
+    .admin-lock-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      background: rgba(11, 14, 20, 0.96);
+      backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .admin-lock-card {
+      background: #12161F;
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      border-radius: 20px;
+      max-width: 440px;
+      width: 100%;
+      padding: 34px 26px;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(239, 68, 68, 0.15);
+      animation: lockModalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes lockModalPop {
+      0% { opacity: 0; transform: scale(0.92); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .admin-lock-shield {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 16px;
+      background: rgba(239, 68, 68, 0.15);
+      border: 2px solid rgba(239, 68, 68, 0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 0 24px rgba(239, 68, 68, 0.3);
+    }
+
+    .admin-lock-title {
+      color: #FFF;
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin: 0 0 8px;
+      letter-spacing: 0.02em;
+    }
+
+    .admin-lock-subtitle {
+      color: var(--text-muted);
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      margin: 0 0 22px;
+    }
+
+    .admin-lock-input-wrap {
+      display: flex;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .admin-lock-prefix {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px 0 0 10px;
+      padding: 12px 14px;
+      font-weight: 800;
+      color: #FFF;
+      font-size: 0.95rem;
+      border-right: none;
+    }
+
+    .admin-lock-phone {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: 0 10px 10px 0;
+      padding: 12px 14px;
+      color: #FFF;
+      font-size: 1rem;
+      font-weight: 700;
+      width: 100%;
+      outline: none;
+      letter-spacing: 0.08em;
+      transition: border-color 0.2s;
+    }
+
+    .admin-lock-phone:focus {
+      border-color: #EF4444;
+      background: rgba(239, 68, 68, 0.05);
+    }
+
+    .admin-lock-error {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #FCA5A5;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-align: left;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .btn-unlock-admin {
+      background: linear-gradient(135deg, #EF4444, #B91C1C);
+      color: #FFF;
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      padding: 13px;
+      font-size: 0.9375rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(239, 68, 68, 0.4);
+      transition: transform 0.15s;
+    }
+
+    .btn-unlock-admin:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-lock-back-store {
+      display: inline-block;
+      margin-top: 14px;
+      color: #94A3B8;
+      text-decoration: none;
+      font-size: 0.8125rem;
+      font-weight: 600;
+    }
+
+    .btn-lock-back-store:hover {
+      color: #FFF;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= ADMIN AUTHENTICATION LOCK OVERLAY ================= -->
+  <div id="adminAuthLockOverlay" class="admin-lock-overlay" style="display: flex;">
+    <div class="admin-lock-card">
+      <div class="admin-lock-shield">🛡️</div>
+      <h2 class="admin-lock-title">Rock N Rolls Kitchen Admin</h2>
+      <p class="admin-lock-subtitle">
+        Strict access control. Enter your 10-digit mobile number registered in the <strong>Admins Database Sheet</strong> to unlock live orders and kitchen operations.
+      </p>
+
+      <form id="adminLockForm" onsubmit="return false;">
+        <div class="admin-lock-input-wrap">
+          <span class="admin-lock-prefix">+91</span>
+          <input type="tel" id="adminLockPhoneInput" class="admin-lock-phone" placeholder="10-digit admin mobile" maxlength="10" inputmode="numeric" autocomplete="tel">
+        </div>
+
+        <div id="adminLockErrorMsg" class="admin-lock-error" style="display: none;"></div>
+
+        <button type="button" id="btnUnlockAdminPortal" class="btn-unlock-admin">
+          <span>🔓 Unlock Admin Portal</span>
+        </button>
+
+        <a href="/" class="btn-lock-back-store">
+          &larr; Return to Customer Ordering App
+        </a>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Top Bar -->
+  <header class="admin-header">
+    <div class="admin-brand">
+      <div class="admin-logo-box">👨‍🍳</div>
+      <div class="admin-title-wrap">
+        <h1>Rock N Rolls Kitchen Live</h1>
+        <p><span class="live-pulse"></span> Listening for Incoming Customer Orders</p>
+      </div>
+    </div>
+    <div class="admin-controls">
+      <!-- Verified Admin Identity Chip -->
+      <div id="adminUserIdentityChip" style="display: none; align-items: center; gap: 8px;">
+        <span class="admin-top-badge" style="background: rgba(220,38,38,0.22); border-color: rgba(239,68,68,0.45); color: #FCA5A5; display: inline-flex; align-items: center; gap: 6px;">
+          <span>🛡️</span>
+          <strong id="adminHeaderName">Admin</strong>
+          <span style="opacity: 0.85; font-weight: 500;" id="adminHeaderRole">(Super Admin)</span>
+        </span>
+        <button type="button" id="btnAdminLogout" class="admin-top-badge" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); color: #E2E8F0; cursor: pointer;" title="Log out of Admin Portal">
+          Logout
+        </button>
+      </div>
+      <!-- Theme Switcher (Dark Mode / Cream Light Mode) -->
+      <button class="theme-toggle-btn" id="btnAdminThemeToggle" type="button" aria-label="Toggle Theme" title="Toggle Light / Dark Mode">
+        <span class="theme-icon theme-icon-sun">☀️</span>
+        <span class="theme-icon theme-icon-moon">🌙</span>
+      </button>
+
+      <!-- Lock-Screen Notification Button -->
+      <button id="btnAdminEnableNotifications" class="admin-top-badge" style="background: rgba(34,197,94,0.18); border-color: rgba(34,197,94,0.45); color: #4ADE80; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; font-weight: 800;" title="Get popup alerts on your lock screen when phone is locked or app is closed">
+        <span>🔔</span> <span id="adminNotifyBtnLabel">Lock-Screen Alerts</span>
+      </button>
+
+      <button id="btnAdminBellTest" class="admin-top-badge" style="background: rgba(245,158,11,0.18); border-color: rgba(245,158,11,0.4); color: #FDE047; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; font-weight: 800;" title="Test Kitchen Order Bell Sound">
+        <span>🔔</span> <span>Test Bell</span>
+      </button>
+      <span class="admin-top-badge" id="liveOrderCountBadge">0 Orders</span>
+      <a href="index.html" class="admin-top-badge" style="text-decoration: none; background: rgba(234,179,8,0.15); color: #FDE047; border-color: rgba(234,179,8,0.4);">
+        Customer View &rarr;
+      </a>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    
+    <!-- Admin Toolbar & WhatsApp Group Info -->
+    <div class="admin-toolbar">
+      <div>
+        <div style="font-size: 0.8125rem; font-weight: 700; color: var(--text-primary);">Target Admin Kitchen Group:</div>
+        <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">
+          Only Admin & Kitchen Staff have access to this group. Customers cannot send messages here.
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <label class="autocopy-toggle-wrap" title="Automatically copy receipt to clipboard when a new order arrives">
+          <input type="checkbox" id="chkAutoCopy" checked>
+          <span>⚡ Auto-Copy New Orders</span>
+        </label>
+        <a href="https://chat.whatsapp.com/F1DKNCYNeMg3o2h9boHTdy" target="_blank" rel="noopener noreferrer" class="group-link-pill">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.4-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.07-.1-.23-.16-.48-.28Z"/></svg>
+          <span>Open WhatsApp Group &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Google Sheets Live Database Card -->
+    <div class="admin-toolbar" style="margin-bottom: 20px; border-color: rgba(16, 185, 129, 0.35);">
+      <div style="flex: 1; min-width: 260px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.2rem;">📊</span>
+          <span style="font-size: 0.9375rem; font-weight: 800; color: var(--text-primary);">Google Sheets Database</span>
+          <span id="sheetsStatusBadge" style="font-size: 0.6875rem; font-weight: 800; background: rgba(234, 179, 8, 0.2); color: #B45309; padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(234, 179, 8, 0.4);">Checking...</span>
+        </div>
+        <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 4px;" id="sheetsSyncStatsText">
+          Auto-saves every customer login and order into your Google Sheet.
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <a href="https://docs.google.com/spreadsheets/d/1V1zicwU14KNkEKdYMM0hGMYnpxvQ59S8FLye6y0MOd8/edit?gid=0#gid=0" target="_blank" rel="noopener noreferrer" class="group-link-pill" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.35); color: #16A34A;">
+          <span>Open Google Sheet ↗</span>
+        </a>
+        <button type="button" class="btn-admin-copy" id="btnToggleSheetsSetup" style="padding: 6px 12px; font-size: 0.75rem;">
+          ⚙️ Setup / Webhook URL
+        </button>
+      </div>
+
+      <!-- Expandable Setup Form -->
+      <div id="sheetsSetupDrawer" style="display: none; width: 100%; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border-subtle);">
+        <div style="font-size: 0.8125rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">Google Apps Script Web App URL:</div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <input type="url" id="sheetsAppsScriptUrlInput" placeholder="https://script.google.com/macros/s/.../exec" style="flex: 1; min-width: 250px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 8px 12px; color: var(--text-primary); font-size: 0.8125rem; outline: none;">
+          <button type="button" id="btnSaveSheetsConfig" style="background: #10B981; color: #000; font-weight: 800; border: none; border-radius: 6px; padding: 8px 16px; font-size: 0.8125rem; cursor: pointer;">
+            Save &amp; Connect
+          </button>
+        </div>
+        <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 8px; line-height: 1.4;">
+          💡 <strong>Quick Setup:</strong> In your Google Sheet, click <em>Extensions &rarr; Apps Script</em>, paste the code from <code style="color: #FDE047;">google-sheets-script.js</code>, click <em>Deploy &rarr; New deployment &rarr; Web app</em> (Who has access: Anyone), and paste the resulting URL above!
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- Live Orders Container -->
+    <div id="adminOrdersContainer">
+      <div class="empty-orders-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--accent-amber);"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <h3>No Customer Orders Yet</h3>
+        <p style="font-size: 0.8125rem;">Orders placed by customers will chime and appear right here in real time.</p>
+      </div>
+    </div>
+
+    <!-- Real-Time Order Notification Pop-Up Container -->
+    <div id="rnrNotificationContainer" class="rnr-notification-container" aria-live="polite"></div>
+
+  </main>
+
+  <!-- App Toast for Feedback -->
+  <div class="app-toast" id="adminToast"></div>
+
+  <script>
+    const ROCK_N_ROLLS_GROUP_URL = 'https://chat.whatsapp.com/F1DKNCYNeMg3o2h9boHTdy';
+    let knownOrderIds = new Set();
+    let isInitialLoad = true;
+
+    // --- HTML Sanitizer ---
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+    }
+
+    // --- Web Audio Brass Reception Bell Synthesizer ---
+    let adminAudioCtx = null;
+    function getAdminAudioContext() {
+      if (!adminAudioCtx) {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (AudioCtx) adminAudioCtx = new AudioCtx();
+      }
+      return adminAudioCtx;
+    }
+
+    function unlockAdminAudio() {
+      const ctx = getAdminAudioContext();
+      if (ctx && ctx.state === 'suspended') {
+        ctx.resume().catch(() => {});
+      }
+    }
+    ['pointerdown', 'touchstart', 'click', 'keydown'].forEach(evt => {
+      document.addEventListener(evt, unlockAdminAudio, { passive: true });
+    });
+
+    // Realistic Kitchen Order Service Bell (Dual-strike brass bell with shimmering overtone decay)
+    function playServiceBellSound() {
+      try {
+        const ctx = getAdminAudioContext();
+        if (!ctx) return;
+        if (ctx.state === 'suspended') {
+          ctx.resume().catch(() => {});
+        }
+
+        const now = ctx.currentTime;
+        // Two strikes for the classic "Ding-Ding!" order bell
+        [0, 0.18].forEach(strikeOffset => {
+          const t = now + strikeOffset;
+          const harmonics = [
+            { f: 880, gain: 0.18, decay: 0.8 },
+            { f: 1760, gain: 0.55, decay: 1.25 },
+            { f: 1772, gain: 0.4, decay: 1.1 },
+            { f: 2640, gain: 0.22, decay: 0.65 },
+            { f: 3520, gain: 0.15, decay: 0.45 }
+          ];
+
+          harmonics.forEach(h => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(h.f, t);
+
+            gain.gain.setValueAtTime(0.0001, t);
+            gain.gain.linearRampToValueAtTime(h.gain, t + 0.003); // Instant metallic strike attack
+            gain.gain.exponentialRampToValueAtTime(0.0001, t + h.decay); // Natural brass exponential decay
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start(t);
+            osc.stop(t + h.decay);
+          });
+        });
+      } catch (e) {
+        console.warn('Admin bell audio notice:', e);
+      }
+    }
+    const playOrderChime = playServiceBellSound;
+
+    // --- System Lock-Screen Notification Trigger (Works when phone is locked or app in background) ---
+    async function triggerSystemLockScreenNotification({ title, body, tag, url }) {
+      if (!('Notification' in window)) return;
+      if (Notification.permission !== 'granted') return;
+
+      const options = {
+        body: body,
+        icon: '/assets/apple_chicken.jpg',
+        badge: '/assets/apple_chicken.jpg',
+        vibrate: [300, 100, 300, 100, 300],
+        tag: tag || 'rnr-admin-' + Date.now(),
+        renotify: true,
+        requireInteraction: true,
+        silent: false,
+        data: { url: url || window.location.href }
+      };
+
+      if ('serviceWorker' in navigator) {
+        try {
+          const reg = await navigator.serviceWorker.ready;
+          if (reg && reg.showNotification) {
+            await reg.showNotification(title, options);
+            return;
+          }
+        } catch (e) {
+          console.warn('SW lock screen notification notice:', e);
+        }
+      }
+
+      try {
+        new Notification(title, options);
+      } catch (e) {}
+    }
+
+    // --- Floating Notification Popup for Admin ---
+    function showAdminNotificationPopup(order) {
+      const container = document.getElementById('rnrNotificationContainer');
+      if (!order) return;
+
+      const itemsDesc = (order.itemList && Array.isArray(order.itemList) && order.itemList.length > 0)
+        ? order.itemList.map(i => `${i.quantity}x ${i.name}`).join(', ')
+        : (order.items || 'Kathi Rolls');
+      const totalStr = order.total ? `₹${order.total}` : '';
+      const orderIdStr = order.orderId || 'NEW';
+
+      // 1. Trigger OS Native Lock-Screen Notification (Visible on Lock Screen / Notification Bar)
+      triggerSystemLockScreenNotification({
+        title: `🛎️ New Order #${orderIdStr.replace(/^#/, '')} Received! (${totalStr})`,
+        body: `${itemsDesc}${order.customerName ? ` • ${order.customerName}` : ''}`,
+        tag: `rnr-admin-order-${orderIdStr}`,
+        url: window.location.href
+      });
+
+      if (!container) return;
+
+      const card = document.createElement('div');
+      card.className = 'rnr-popup-card popup-type-admin-new-order';
+      card.setAttribute('role', 'alert');
+
+      const itemsDesc = (order.itemList && Array.isArray(order.itemList) && order.itemList.length > 0)
+        ? order.itemList.map(i => `${i.quantity}x ${i.name}`).join(', ')
+        : (order.items || 'Kathi Rolls');
+      const totalStr = order.total ? `₹${order.total}` : '';
+      const orderIdStr = order.orderId || 'NEW';
+
+      card.innerHTML = `
+        <div class="popup-icon-badge">🛎️</div>
+        <div class="popup-body-col">
+          <div class="popup-header-row">
+            <span class="popup-badge">NEW ORDER PUSHED</span>
+            <span class="popup-time">Just now</span>
+          </div>
+          <div class="popup-title">New Order #${orderIdStr.replace(/^#/, '')} Received!</div>
+          <div class="popup-message">
+            <strong>${totalStr}</strong> • ${escapeHtml(itemsDesc)}
+            ${order.customerName ? `<br><span style="color:#A0AEC0; font-size:0.75rem;">👤 ${escapeHtml(order.customerName)}</span>` : ''}
+          </div>
+          <div class="popup-action-row">
+            <button type="button" class="btn-popup-action">
+              <span>👀 View in Kitchen Feed</span>
+            </button>
+          </div>
+        </div>
+        <button type="button" class="popup-close-btn" aria-label="Dismiss">✕</button>
+        <div class="popup-progress-line" style="animation-duration: 8000ms;"></div>
+      `;
+
+      function dismissCard() {
+        if (card._dismissTimer) clearTimeout(card._dismissTimer);
+        card.classList.add('popup-closing');
+        setTimeout(() => card.remove(), 320);
+      }
+
+      card.querySelector('.popup-close-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        dismissCard();
+      });
+
+      card.addEventListener('click', () => {
+        scrollToOrderCard(order.orderId);
+      });
+
+      card.querySelector('.btn-popup-action').addEventListener('click', (e) => {
+        e.stopPropagation();
+        scrollToOrderCard(order.orderId);
+      });
+
+      container.prepend(card);
+
+      card._dismissTimer = setTimeout(dismissCard, 8000);
+    }
+
+    function scrollToOrderCard(orderId) {
+      const cleanId = (orderId || '').replace(/^#/, '');
+      const card = document.querySelector(`[data-order-id="${orderId}"]`) ||
+                   document.querySelector(`[data-order-id="#${cleanId}"]`) ||
+                   document.querySelector(`[data-order-id="${cleanId}"]`);
+      if (card) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        card.style.transition = 'box-shadow 0.3s ease, border-color 0.3s ease';
+        card.style.borderColor = '#F59E0B';
+        card.style.boxShadow = '0 0 25px rgba(245, 158, 11, 0.6)';
+        setTimeout(() => {
+          card.style.borderColor = '';
+          card.style.boxShadow = '';
+        }, 3000);
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('adminToast');
+      toast.innerHTML = msg;
+      toast.classList.add('visible');
+      setTimeout(() => toast.classList.remove('visible'), 3500);
+    }
+    const showAdminToast = showToast;
+
+    async function copyToClipboard(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch (err) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        return true;
+      }
+    }
+
+    // Format Full WhatsApp Receipt Message with matching RNR number
+    function formatOrderReceipt(order) {
+      let msg = `🔥 *ROCK ON ROLL PAYMENT - NEW ORDER* 🔥\n`;
+      msg += `━━━━━━━━━━━━━━━━━━━━━\n`;
+      msg += `📋 *Order ID:* ${order.orderId}\n`;
+      if (order.customerName) msg += `👤 *Customer Name:* ${order.customerName}\n`;
+      if (order.customerPhone) msg += `📞 *Customer Mobile:* +91 ${order.customerPhone}\n`;
+      msg += `⏰ *Order Time:* ${order.date || 'Today'}\n`;
+      msg += `━━━━━━━━━━━━━━━━━━━━━\n`;
+      msg += `🍴 *ITEMS TO PREPARE:*\n`;
+
+      if (order.itemList && Array.isArray(order.itemList) && order.itemList.length > 0) {
+        order.itemList.forEach(item => {
+          const portionStr = item.portion ? ` (${item.portion})` : '';
+          const addonStr = (item.addons && item.addons.length > 0) ? ` [Addons: ${item.addons.join(', ')}]` : '';
+          msg += `• *${item.quantity}x ${item.name}*${portionStr}${addonStr} — ₹${item.total || (item.price * item.quantity)}\n`;
+        });
+      } else {
+        msg += `• *${order.items}* — ₹${order.total}\n`;
+      }
+
+      msg += `━━━━━━━━━━━━━━━━━━━━━\n`;
+      if (order.instructions && order.instructions.trim()) {
+        msg += `🍳 *Special Cooking Notes:* ${order.instructions.trim()}\n`;
+        msg += `━━━━━━━━━━━━━━━━━━━━━\n`;
+      }
+      msg += `💳 *Payment Method:* ${order.paymentMethod || 'UPI'}\n`;
+      msg += `🛡️ *Payment Status:* ✅ PAID & CONFIRMED (₹${order.total})\n`;
+      msg += `⭐️ *TOTAL BILL:* ₹${order.total} (Zero extra packaging/tax)\n`;
+      msg += `━━━━━━━━━━━━━━━━━━━━━\n`;
+      msg += `📢 *GROUP DISPATCH: Rock on Roll payment* 🚀\n`;
+      msg += `🔗 *Group Link:* ${ROCK_N_ROLLS_GROUP_URL}\n`;
+      msg += `Please acknowledge & start live prep!`;
+      return msg;
+    }
+
+    // Admin Action: Copy receipt and Open WhatsApp Group Directly
+    window.copyAndOpenDirectGroup = async function(orderId) {
+      const orders = window._cachedOrders || [];
+      const order = orders.find(o => o.orderId === orderId);
+      if (!order) return;
+
+      const receipt = formatOrderReceipt(order);
+      await copyToClipboard(receipt);
+      showToast(`📋 <strong>Receipt Copied!</strong><br>Opening Rock on Roll payment group... Tap <em>Paste &amp; Send</em>!`);
+      setTimeout(() => {
+        window.open(ROCK_N_ROLLS_GROUP_URL, '_blank');
+      }, 350);
+    };
+
+    // Admin Action: Share directly to WhatsApp
+    window.shareOrderToGroup = async function(orderId) {
+      const orders = window._cachedOrders || [];
+      const order = orders.find(o => o.orderId === orderId);
+      if (!order) return;
+
+      const receipt = formatOrderReceipt(order);
+      await copyToClipboard(receipt);
+      const encoded = encodeURIComponent(receipt);
+
+      showToast(`📲 <strong>Opening WhatsApp...</strong><br>Select <em>Rock on Roll payment</em> &amp; send!`);
+
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (isMobile) {
+        window.location.href = `whatsapp://send?text=${encoded}`;
+        setTimeout(() => {
+          window.open(`https://api.whatsapp.com/send?text=${encoded}`, '_blank');
+        }, 1000);
+      } else {
+        window.open(`https://api.whatsapp.com/send?text=${encoded}`, '_blank');
+      }
+    };
+
+    // Admin Action: Copy receipt text
+    window.copyOrderReceipt = async function(orderId) {
+      const orders = window._cachedOrders || [];
+      const order = orders.find(o => o.orderId === orderId);
+      if (!order) return;
+
+      const receipt = formatOrderReceipt(order);
+      await copyToClipboard(receipt);
+      showToast(`📋 Receipt for <strong>${orderId}</strong> copied! Ready to paste into group.`);
+    };
+
+    // Admin Action: Update kitchen workflow status
+    window.updateOrderStatus = async function(orderId, newStatus) {
+      if (!activeAdminPhone) {
+        showLockOverlay();
+        return;
+      }
+      try {
+        const res = await fetch(`/api/orders/${encodeURIComponent(orderId)}/status`, {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json',
+            'x-admin-phone': activeAdminPhone
+          },
+          body: JSON.stringify({ status: newStatus })
+        });
+        if (res.ok) {
+          showToast(`⚡ Order <strong>${orderId}</strong> &rarr; <strong>${newStatus}</strong>!`);
+          fetchOrders();
+          // Instant 0ms broadcast to customer app and other admin tabs
+          try {
+            const bc = new BroadcastChannel('rnr_orders_channel');
+            bc.postMessage({ type: 'ORDER_STATUS_CHANGED', orderId, newStatus, timestamp: Date.now() });
+            localStorage.setItem('rnr_order_sync_trigger', JSON.stringify({ action: 'STATUS_UPDATE', orderId, newStatus, t: Date.now() }));
+          } catch(e) {}
+        } else {
+          alert('Could not update order status');
+        }
+      } catch (err) {
+        console.error('Error updating order status:', err);
+        alert('Network error updating status');
+      }
+    };
+
+    // Admin Action: Delete order
+    window.deleteOrder = async function(orderId) {
+      if (!activeAdminPhone) {
+        showLockOverlay();
+        return;
+      }
+      if (!confirm(`Delete order ${orderId}?`)) return;
+      try {
+        await fetch(`/api/orders/${encodeURIComponent(orderId)}`, { 
+          method: 'DELETE',
+          headers: {
+            'x-admin-phone': activeAdminPhone
+          }
+        });
+        showToast(`🗑️ Order ${orderId} deleted.`);
+        fetchOrders();
+        try {
+          const bc = new BroadcastChannel('rnr_orders_channel');
+          bc.postMessage({ type: 'ORDER_DELETED', orderId, timestamp: Date.now() });
+          localStorage.setItem('rnr_order_sync_trigger', Date.now().toString());
+        } catch(e) {}
+      } catch (err) {
+        alert('Failed to delete order');
+      }
+    };
+
+    // Poll orders from backend (Restricted to verified Admins)
+    async function fetchOrders() {
+      if (!activeAdminPhone) return;
+      try {
+        const res = await fetch(`/api/orders?admin_phone=${encodeURIComponent(activeAdminPhone)}`, {
+          headers: {
+            'x-admin-phone': activeAdminPhone
+          }
+        });
+        if (res.status === 403) {
+          showLockOverlay();
+          showLockError('Access Denied: Admin authorization required to view store orders.');
+          return;
+        }
+        const orders = await res.json();
+        if (!Array.isArray(orders)) return;
+        window._cachedOrders = orders;
+
+        const countBadge = document.getElementById('liveOrderCountBadge');
+        if (countBadge) countBadge.textContent = `${orders.length} ${orders.length === 1 ? 'Order' : 'Orders'}`;
+
+        // Check for new incoming orders
+        let hasNew = false;
+        let newOrdersList = [];
+        orders.forEach(o => {
+          if (!knownOrderIds.has(o.orderId)) {
+            knownOrderIds.add(o.orderId);
+            if (!isInitialLoad) {
+              hasNew = true;
+              newOrdersList.push(o);
+            }
+          }
+        });
+
+        if (hasNew && newOrdersList.length > 0) {
+          playServiceBellSound();
+          const latest = newOrdersList[0];
+          showAdminNotificationPopup(latest);
+          const autoCopyOn = document.getElementById('chkAutoCopy')?.checked ?? true;
+          if (autoCopyOn && latest) {
+            const receipt = formatOrderReceipt(latest);
+            copyToClipboard(receipt);
+            showToast(`🔔 <strong>New Order ${latest.orderId}!</strong><br>Receipt auto-copied! Switch to WhatsApp &amp; paste.`);
+          }
+        }
+        isInitialLoad = false;
+
+        renderOrders(orders);
+      } catch (err) {
+        console.warn('Error fetching orders:', err);
+      }
+    }
+
+    function renderOrders(orders) {
+      const container = document.getElementById('adminOrdersContainer');
+      if (!container) return;
+
+      if (!orders || orders.length === 0) {
+        container.innerHTML = `
+          <div class="empty-orders-state">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--accent-amber);"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <h3>No Customer Orders Yet</h3>
+            <p style="font-size: 0.8125rem;">Orders placed by customers will chime and appear right here in real time.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = orders.map((order, idx) => {
+        let itemsHtml = '';
+        if (order.itemList && Array.isArray(order.itemList) && order.itemList.length > 0) {
+          itemsHtml = order.itemList.map(it => `
+            <div class="admin-item-line">
+              <div>
+                <span class="admin-item-title">${it.quantity}x ${it.name}</span>
+                <div class="admin-item-sub">
+                  ${it.portion ? `Portion: ${it.portion}` : ''}
+                  ${it.addons && it.addons.length > 0 ? ` &bull; Addons: ${it.addons.join(', ')}` : ''}
+                </div>
+              </div>
+              <span style="font-weight: 700; color: var(--text-primary);">₹${it.total || (it.price * it.quantity)}</span>
+            </div>
+          `).join('');
+        } else {
+          itemsHtml = `
+            <div class="admin-item-line">
+              <span class="admin-item-title">${order.items}</span>
+              <span style="font-weight: 700; color: var(--text-primary);">₹${order.total}</span>
+            </div>
+          `;
+        }
+
+        const notesHtml = (order.instructions && order.instructions.trim()) ? `
+          <div class="admin-notes-alert">
+            🍳 <strong>Chef Note:</strong> "${order.instructions.trim()}"
+          </div>
+        ` : '';
+
+        const kStatus = (order.kitchenStatus || order.status || 'PREPARING').toUpperCase();
+        const isReady = kStatus.includes('READY');
+        const isDelivered = kStatus === 'DELIVERED' || kStatus === 'COMPLETED';
+        const isPreparing = !isReady && !isDelivered;
+
+        return `
+          <div class="admin-order-card ${idx === 0 ? 'new-order' : ''} ${isReady ? 'status-card-ready' : (isDelivered ? 'status-card-done' : 'status-card-prep')}" data-order-id="${order.orderId}">
+            <div class="admin-card-header">
+              <div>
+                <span class="admin-order-id">${order.orderId}</span>
+                ${idx === 0 ? '<span style="font-size: 0.65rem; background: #22C55E; color: #000; font-weight: 800; padding: 2px 6px; border-radius: 4px; margin-left: 8px;">LATEST</span>' : ''}
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                ${isReady ? `
+                  <span class="admin-status-badge status-ready" style="font-size: 0.72rem; color: #4ADE80; font-weight: 800; background: rgba(34,197,94,0.18); border: 1px solid rgba(34,197,94,0.4); padding: 3px 9px; border-radius: 6px; display: inline-flex; align-items: center; gap: 5px;">
+                    <span class="live-pulse"></span> 🔔 READY FOR PICKUP
+                  </span>
+                ` : isDelivered ? `
+                  <span class="admin-status-badge status-done" style="font-size: 0.72rem; color: #60A5FA; font-weight: 800; background: rgba(59,130,246,0.18); border: 1px solid rgba(59,130,246,0.4); padding: 3px 9px; border-radius: 6px;">
+                    ✅ FOOD DELIVERED
+                  </span>
+                ` : `
+                  <span class="admin-status-badge status-prep" style="font-size: 0.72rem; color: #FBBF24; font-weight: 800; background: rgba(245,158,11,0.18); border: 1px solid rgba(245,158,11,0.4); padding: 3px 9px; border-radius: 6px; display: inline-flex; align-items: center; gap: 5px;">
+                    <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#FBBF24;"></span> 🍳 PREPARING
+                  </span>
+                `}
+                ${(order.isPaid === false || (order.paymentMethod && order.paymentMethod.includes('Cash')) || (order.status && order.status.includes('UNPAID'))) ? `
+                  <span class="admin-pay-badge pay-cash" style="font-size: 0.72rem; color: #FBBF24; font-weight: 900; background: rgba(245,158,11,0.22); padding: 3px 9px; border-radius: 6px; border: 1px solid rgba(245,158,11,0.6);">
+                    💵 COLLECT ₹${order.total} CASH
+                  </span>
+                ` : `
+                  <span class="admin-pay-badge pay-paid" style="font-size: 0.72rem; color: #4ADE80; font-weight: 700; background: rgba(34,197,94,0.14); padding: 3px 9px; border-radius: 6px; border: 1px solid rgba(34,197,94,0.3);">
+                    ✓ PAID (₹${order.total})
+                  </span>
+                `}
+              </div>
+            </div>
+
+            <div class="admin-order-meta" style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 8px;">
+              <span>Placed: ${order.date || 'Today'}</span>
+              <span>&bull;</span>
+              <span>Payment: <strong style="color: var(--text-primary);">${order.paymentMethod || 'UPI'}</strong></span>
+              ${order.utr ? `<span style="background: rgba(34, 197, 94, 0.15); color: #4ADE80; font-weight: 800; font-family: monospace; font-size: 0.75rem; padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(34, 197, 94, 0.4);">Txn: ${order.utr}</span>` : ''}
+            </div>
+
+            <!-- Customer Details Block -->
+            <div class="admin-customer-info-row">
+              <div class="admin-customer-pill">
+                <span>👤</span>
+                <span class="admin-customer-name" style="color: inherit; font-weight: 800;">${escapeHtml(order.customerName || 'Walk-in Guest')}</span>
+              </div>
+              ${order.customerPhone ? `
+                <div class="admin-customer-contact" style="display: flex; align-items: center; gap: 8px;">
+                  <a href="tel:${order.customerPhone}" class="btn-admin-icon-action btn-admin-call-icon" title="Call Customer (+91 ${order.customerPhone})" aria-label="Call Customer">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                  </a>
+                </div>
+              ` : '<span style="font-size:0.75rem; color:var(--text-muted);">No phone provided</span>'}
+            </div>
+
+            <div class="admin-items-list">
+              ${itemsHtml}
+            </div>
+
+            ${notesHtml}
+
+            <!-- Kitchen Workflow Status Controls -->
+            <div class="admin-workflow-actions" style="margin: 12px 0 8px;">
+              ${!isPreparing ? `
+                <button type="button" class="btn-workflow btn-wf-prep" onclick="updateOrderStatus('${order.orderId}', 'PREPARING')">
+                  🍳 Set Preparing
+                </button>
+              ` : ''}
+
+              ${!isReady ? `
+                <button type="button" class="btn-workflow btn-wf-ready" onclick="updateOrderStatus('${order.orderId}', 'READY FOR PICKUP')">
+                  🔔 Set Pickup Ready
+                </button>
+              ` : ''}
+
+              ${!isDelivered ? `
+                <button type="button" class="btn-workflow btn-wf-done" onclick="updateOrderStatus('${order.orderId}', 'DELIVERED')">
+                  ✅ Mark Delivered
+                </button>
+              ` : ''}
+            </div>
+
+            <div class="admin-card-footer">
+              <div>
+                <span style="font-size: 0.6875rem; color: var(--text-muted); text-transform: uppercase;">Total Bill</span>
+                <div style="font-size: 1.1875rem; font-weight: 900; color: var(--text-primary);">₹${order.total}</div>
+              </div>
+
+              <!-- Admin Quick Dispatch Buttons -->
+              <div class="admin-actions-deck">
+                <button class="btn-admin-open-group" onclick="copyAndOpenDirectGroup('${order.orderId}')" title="Copy receipt and open Rock on Roll payment WhatsApp Group">
+                  <span>📲 Copy &amp; Open Group</span>
+                </button>
+                <button class="btn-admin-whatsapp" onclick="shareOrderToGroup('${order.orderId}')" title="Share receipt with text pre-filled in WhatsApp">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.4-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.07-.1-.23-.16-.48-.28Z"/></svg>
+                  <span>Share</span>
+                </button>
+                <button class="btn-admin-copy" onclick="copyOrderReceipt('${order.orderId}')" title="Copy receipt text only">
+                  📋 <span>Copy</span>
+                </button>
+                <button class="btn-admin-delete" onclick="deleteOrder('${order.orderId}')" title="Delete Order">
+                  🗑️
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+
+
+    // Google Sheets live status & webhook update
+    async function fetchSheetsStatus() {
+      try {
+        const res = await fetch('/api/sheets/status');
+        const data = await res.json();
+        const badge = document.getElementById('sheetsStatusBadge');
+        const stats = document.getElementById('sheetsSyncStatsText');
+        const input = document.getElementById('sheetsAppsScriptUrlInput');
+
+        if (data.isConfigured) {
+          if (badge) {
+            badge.textContent = '🟢 Auto-Syncing';
+            badge.style.background = 'rgba(16, 185, 129, 0.2)';
+            badge.style.color = '#34D399';
+            badge.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+          }
+          if (stats) {
+            stats.innerHTML = `✅ Streamed: <strong>${data.totalSyncedOrders || 0} Orders</strong> &bull; <strong>${data.totalSyncedLogins || 0} Logins</strong> ${data.pendingQueueCount ? `&bull; <span style="color:#FDE047;">(${data.pendingQueueCount} queued)</span>` : ''}`;
+          }
+        } else {
+          if (badge) {
+            badge.textContent = '⏳ Setup Required';
+            badge.style.background = 'rgba(234, 179, 8, 0.2)';
+            badge.style.color = '#FDE047';
+            badge.style.borderColor = 'rgba(234, 179, 8, 0.4)';
+          }
+          if (stats) {
+            stats.textContent = 'Target Sheet linked. Paste Apps Script Webhook URL to stream real-time data.';
+          }
+        }
+
+        if (input && !input.value && data.appsScriptUrl) {
+          input.value = data.appsScriptUrl;
+        }
+      } catch (e) {
+        console.warn('Error fetching sheets status:', e);
+      }
+    }
+
+    // Toggle setup drawer
+    document.getElementById('btnToggleSheetsSetup')?.addEventListener('click', () => {
+      const drawer = document.getElementById('sheetsSetupDrawer');
+      if (drawer) {
+        drawer.style.display = drawer.style.display === 'none' ? 'block' : 'none';
+      }
+    });
+
+    // Save Apps Script URL
+    document.getElementById('btnSaveSheetsConfig')?.addEventListener('click', async () => {
+      const input = document.getElementById('sheetsAppsScriptUrlInput');
+      const url = input?.value.trim();
+      if (!url) {
+        alert('Please paste your Google Apps Script Web App URL');
+        return;
+      }
+      try {
+        const res = await fetch('/api/sheets/config', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ appsScriptUrl: url })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showAdminToast('✅ Google Sheets Webhook Connected & Synced!', 4000);
+          fetchSheetsStatus();
+        } else {
+          alert('Failed to save config: ' + (data.error || 'Unknown error'));
+        }
+      } catch (err) {
+        alert('Error connecting Google Sheets: ' + err.message);
+      }
+    });
+
+    function getCookieValue(name) {
+      const match = document.cookie.match(new RegExp('(?:^|;\\s*)' + name + '=([^;]*)'));
+      return match ? decodeURIComponent(match[1]) : '';
+    }
+
+    let activeAdminPhone = localStorage.getItem('rnr_admin_phone') || getCookieValue('rnr_admin_phone') || getCookieValue('rnr_customer_phone') || '';
+    let pollingInterval = null;
+    let sheetsPollingInterval = null;
+
+    function showLockOverlay() {
+      const overlay = document.getElementById('adminAuthLockOverlay');
+      if (overlay) overlay.style.display = 'flex';
+      const chip = document.getElementById('adminUserIdentityChip');
+      if (chip) chip.style.display = 'none';
+      stopPolling();
+    }
+
+    function hideLockOverlay(adminData) {
+      const overlay = document.getElementById('adminAuthLockOverlay');
+      if (overlay) overlay.style.display = 'none';
+      const chip = document.getElementById('adminUserIdentityChip');
+      if (chip) chip.style.display = 'inline-flex';
+      const nameEl = document.getElementById('adminHeaderName');
+      const roleEl = document.getElementById('adminHeaderRole');
+      if (nameEl) nameEl.textContent = adminData.name || 'Admin';
+      if (roleEl) roleEl.textContent = `(${adminData.role || 'Staff'})`;
+    }
+
+    function showLockError(msg) {
+      const errBox = document.getElementById('adminLockErrorMsg');
+      if (errBox) {
+        errBox.textContent = msg;
+        errBox.style.display = 'block';
+      }
+    }
+
+    function clearLockError() {
+      const errBox = document.getElementById('adminLockErrorMsg');
+      if (errBox) {
+        errBox.textContent = '';
+        errBox.style.display = 'none';
+      }
+    }
+
+    function startPolling() {
+      stopPolling();
+      fetchOrders();
+      fetchSheetsStatus();
+      pollingInterval = setInterval(fetchOrders, 3000);
+      sheetsPollingInterval = setInterval(fetchSheetsStatus, 5000);
+    }
+
+    function stopPolling() {
+      if (pollingInterval) clearInterval(pollingInterval);
+      if (sheetsPollingInterval) clearInterval(sheetsPollingInterval);
+      pollingInterval = null;
+      sheetsPollingInterval = null;
+    }
+
+    async function verifyAdminPhone(phone, isInitial = false) {
+      const cleanPhone = String(phone || '').replace(/[^0-9]/g, '').slice(-10);
+      if (!cleanPhone || cleanPhone.length < 10) {
+        if (!isInitial) showLockError('Please enter a valid 10-digit mobile number.');
+        showLockOverlay();
+        return false;
+      }
+
+      try {
+        const res = await fetch(`/api/admin/check?phone=${encodeURIComponent(cleanPhone)}`);
+        const data = await res.json();
+        if (data && data.success && data.isAdmin) {
+          activeAdminPhone = cleanPhone;
+          localStorage.setItem('rnr_admin_phone', cleanPhone);
+          document.cookie = `rnr_admin_phone=${cleanPhone}; path=/; max-age=2592000; SameSite=Lax`;
+          clearLockError();
+          hideLockOverlay(data);
+          startPolling();
+          if (!isInitial) {
+            showToast(`🔓 Welcome, <strong>${data.name || 'Admin'}</strong>! Kitchen terminal unlocked.`);
+          }
+          return true;
+        } else {
+          activeAdminPhone = '';
+          localStorage.removeItem('rnr_admin_phone');
+          document.cookie = 'rnr_admin_phone=; path=/; max-age=0; SameSite=Lax';
+          showLockOverlay();
+          if (!isInitial) {
+            showLockError(`❌ Access Denied: +91 ${cleanPhone} is not registered in the authorized admin database sheet. Only store admins can view orders.`);
+          }
+          return false;
+        }
+      } catch (err) {
+        console.error('Error verifying admin:', err);
+        showLockOverlay();
+        if (!isInitial) {
+          showLockError('Network connection error. Please verify server connection and try again.');
+        }
+        return false;
+      }
+    }
+
+    // Unlock Button & Form Listener
+    document.getElementById('btnUnlockAdminPortal')?.addEventListener('click', () => {
+      const input = document.getElementById('adminLockPhoneInput');
+      verifyAdminPhone(input?.value || '', false);
+    });
+
+    document.getElementById('adminLockPhoneInput')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const input = document.getElementById('adminLockPhoneInput');
+        verifyAdminPhone(input?.value || '', false);
+      }
+    });
+
+    // Admin Logout Button
+    document.getElementById('btnAdminLogout')?.addEventListener('click', () => {
+      activeAdminPhone = '';
+      localStorage.removeItem('rnr_admin_phone');
+      document.cookie = 'rnr_admin_phone=; path=/; max-age=0; SameSite=Lax';
+      showLockOverlay();
+      clearLockError();
+      const input = document.getElementById('adminLockPhoneInput');
+      if (input) input.value = '';
+      showToast('👋 Logged out of Admin Portal.');
+    });
+
+    // Initial Auth Check on page load
+    if (activeAdminPhone) {
+      const input = document.getElementById('adminLockPhoneInput');
+      if (input) input.value = activeAdminPhone;
+      verifyAdminPhone(activeAdminPhone, true);
+    } else {
+      showLockOverlay();
+    }
+
+    // Bell Test Button Handler
+    const bellBtn = document.getElementById('btnAdminBellTest');
+    if (bellBtn) {
+      bellBtn.onclick = () => {
+        playServiceBellSound();
+        showAdminNotificationPopup({
+          orderId: 'DEMO-888',
+          total: 320,
+          customerName: 'Demo Customer',
+          itemList: [{ quantity: 2, name: 'Double Egg Chicken Roll' }]
+        });
+        showToast('🔔 <strong>Kitchen Bell Tested!</strong> Dual-strike sound &amp; popup working.');
+      };
+    }
+
+    // --- System Lock-Screen Notifications Setup for Admin ---
+    const btnEnableNotif = document.getElementById('btnAdminEnableNotifications');
+    const lblNotify = document.getElementById('adminNotifyBtnLabel');
+
+    function updateNotifyBtnState() {
+      if (!('Notification' in window)) {
+        if (btnEnableNotif) btnEnableNotif.style.display = 'none';
+        return;
+      }
+      if (Notification.permission === 'granted') {
+        if (lblNotify) lblNotify.textContent = '✓ Alerts Active';
+        if (btnEnableNotif) {
+          btnEnableNotif.style.background = 'rgba(34, 197, 94, 0.25)';
+          btnEnableNotif.style.borderColor = 'rgba(34, 197, 94, 0.6)';
+        }
+      } else {
+        if (lblNotify) lblNotify.textContent = 'Enable Lock Alerts';
+      }
+    }
+    updateNotifyBtnState();
+
+    btnEnableNotif?.addEventListener('click', async () => {
+      if (!('Notification' in window)) {
+        showToast('⚠️ Web Notifications are not supported in this browser.');
+        return;
+      }
+      try {
+        const perm = await Notification.requestPermission();
+        if (perm === 'granted') {
+          updateNotifyBtnState();
+          playServiceBellSound();
+          triggerSystemLockScreenNotification({
+            title: '🔔 Lock-Screen Alerts Active!',
+            body: 'Lock your phone screen now. You will receive live alerts here whenever a customer places an order!',
+            tag: 'rnr-admin-test-alert',
+            url: window.location.href
+          });
+          showToast('✅ <strong>Lock-Screen Notifications Active!</strong><br>Lock your phone screen now to test the alert banner.');
+        } else {
+          showToast('⚠️ Notification permission denied. Please allow notifications in browser site settings.');
+        }
+      } catch (err) {
+        console.warn('Notification permission error:', err);
+      }
+    });
+
+    // --- Service Worker Registration for Background Push & Lock Screen ---
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js', { scope: '/' })
+        .then(reg => {
+          console.log('[ADMIN SW] Service worker registered with scope:', reg.scope);
+        })
+        .catch(err => {
+          console.warn('[ADMIN SW] Service worker registration error:', err);
+        });
+    }
+
+    // --- Server-Sent Events (SSE) Live Kitchen Push Stream ---
+    function initAdminSSE() {
+      if (!('EventSource' in window)) return;
+      try {
+        const sse = new EventSource('/api/events');
+        sse.addEventListener('NEW_ORDER', (e) => {
+          try {
+            const order = JSON.parse(e.data);
+            console.log('[SSE EVENT] New Order received:', order);
+            playServiceBellSound();
+            showAdminNotificationPopup(order);
+            fetchOrders();
+          } catch (err) {}
+        });
+        sse.addEventListener('ORDER_STATUS_CHANGED', () => {
+          fetchOrders();
+        });
+        sse.addEventListener('SETTINGS_UPDATED', () => {
+          fetchOrders();
+        });
+        sse.onerror = () => {
+          // Automatic reconnect handled by EventSource
+        };
+      } catch (e) {
+        console.warn('Admin SSE init error:', e);
+      }
+    }
+    initAdminSSE();
+
+    // --- Theme Switcher (Dark Mode / Cream Light Mode) ---
+    function applyAdminTheme(theme) {
+      if (theme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.body.setAttribute('data-theme', 'light');
+        document.body.classList.add('light-theme');
+        localStorage.setItem('rnr_theme', 'light');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        document.body.removeAttribute('data-theme');
+        document.body.classList.remove('light-theme');
+        localStorage.setItem('rnr_theme', 'dark');
+      }
+    }
+    const savedTheme = localStorage.getItem('rnr_theme') || 'dark';
+    applyAdminTheme(savedTheme);
+
+    document.getElementById('btnAdminThemeToggle')?.addEventListener('click', () => {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      applyAdminTheme(isLight ? 'dark' : 'light');
+    });
+
+    // Instant Zero-Latency Cross-Tab & Cross-Window Sync
+    try {
+      const ordersChannel = new BroadcastChannel('rnr_orders_channel');
+      ordersChannel.onmessage = (e) => {
+        if (e.data && (e.data.type === 'NEW_ORDER' || e.data.type === 'ORDER_UPDATED' || e.data.type === 'ORDERS_REFRESH')) {
+          if (e.data.type === 'NEW_ORDER' && e.data.order) {
+            playServiceBellSound();
+            showAdminNotificationPopup(e.data.order);
+          }
+          fetchOrders();
+        }
+      };
+    } catch (e) {}
+
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'rnr_order_sync_trigger' || e.key === 'rnr_last_order_broadcast') {
+        fetchOrders();
+      } else if (e.key === 'rnr_theme') {
+        applyAdminTheme(e.newValue || 'dark');
+      }
+    });
+
+    window.addEventListener('focus', () => {
+      fetchOrders();
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        fetchOrders();
+      }
+    });
+  </script>
+</body>
+</html>

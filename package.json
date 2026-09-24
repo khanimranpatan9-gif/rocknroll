@@ -1,0 +1,27 @@
+{
+  "name": "rock-n-rolls",
+  "version": "1.0.0",
+  "description": "Rock N Rolls Food Delivery Web App & Kitchen Admin WhatsApp Dispatch",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "tunnel": "node tunnel.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^7.0.0-rc14",
+    "localtunnel": "^2.0.2",
+    "pino": "^9.6.0",
+    "qrcode": "^1.5.4",
+    "qrcode-terminal": "^0.12.0"
+  },
+  "keywords": [
+    "rock-n-rolls",
+    "kathi-rolls",
+    "food-delivery",
+    "whatsapp-bot",
+    "kitchen-portal"
+  ],
+  "author": "Rock N Rolls",
+  "license": "ISC"
+}

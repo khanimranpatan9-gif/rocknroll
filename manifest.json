@@ -1,0 +1,24 @@
+{
+  "name": "Rock N Rolls Live Kitchen",
+  "short_name": "Rock N Rolls",
+  "description": "Rock N Rolls Kathi Rolls, Crispy Fried Chicken, Burgers & Pizza",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0E14",
+  "theme_color": "#16A34A",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/apple_chicken.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/apple_chicken.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}
